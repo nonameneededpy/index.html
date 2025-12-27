@@ -4,56 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | nonameneeded</title>
-    <!-- Importing a rounded, soft font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* --- COSY DARK THEME VARIABLES --- */
         :root {
-            --bg-color: #1A1614;        /* Very dark espresso */
+            --bg-color: #1A1614;
             --bg-gradient: linear-gradient(135deg, #1A1614 0%, #2C2420 100%);
-            --card-bg: #2C2420;         /* Mocha */
-            --text-main: #EFEBE9;       /* Steamed milk (Light cream) */
-            --text-light: #BCAAA4;      /* Latte foam (Muted beige) */
-            --accent: #5D4037;          /* Darker brown accent */
-            --highlight: #FFCC80;       /* Warm Amber/Lantern light */
-            --code-bg: #120E0D;         /* Almost black coffee */
+            --card-bg: #2C2420;
+            --text-main: #EFEBE9;
+            --text-light: #BCAAA4;
+            --accent: #5D4037;
+            --highlight: #FFCC80;
+            --code-bg: #120E0D;
             --border-radius: 24px;
             --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.3);
             --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.5);
         }
 
         /* --- GLOBAL ANIMATIONS --- */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
-        }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
+        @keyframes breathe { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes steam { 0% { transform: translateY(0) scale(1); opacity: 0.8; } 100% { transform: translateY(-20px) scale(1.5); opacity: 0; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes breathe {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes steam {
-            0% { transform: translateY(0) scale(1); opacity: 0.8; }
-            100% { transform: translateY(-20px) scale(1.5); opacity: 0; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- GLOBAL STYLES --- */
+        /* --- STYLES --- */
         body {
             font-family: 'Nunito', sans-serif;
             background: var(--bg-gradient);
             background-size: 200% 200%;
-            animation: breathe 15s ease infinite; /* Subtle background shift */
+            animation: breathe 15s ease infinite;
             color: var(--text-main);
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             line-height: 1.7;
             overflow-x: hidden;
         }
@@ -61,330 +42,80 @@
         h1, h2, h3 { font-weight: 800; color: var(--text-main); margin-top: 0; }
         a { text-decoration: none; color: inherit; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
-        /* --- HEADER --- */
-        header {
-            text-align: center;
-            padding: 80px 20px 40px; /* Adjusted padding */
-            margin-bottom: 40px;
-            position: relative;
-        }
+        header { text-align: center; padding: 80px 20px 40px; margin-bottom: 40px; }
 
-        /* The Animated Avatar */
-        .avatar-container {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 20px;
-        }
-
+        .avatar-container { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
         .avatar {
-            width: 100%;
-            height: 100%;
-            background-color: var(--card-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            border: 4px solid var(--highlight);
-            box-shadow: 0 0 20px rgba(255, 204, 128, 0.2);
-            animation: float 6s ease-in-out infinite; /* Gentle floating */
-            z-index: 2;
-            position: relative;
-            overflow: hidden;
+            width: 100%; height: 100%; background-color: var(--card-bg); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 4rem;
+            border: 4px solid var(--highlight); box-shadow: 0 0 20px rgba(255, 204, 128, 0.2);
+            animation: float 6s ease-in-out infinite; z-index: 2; position: relative; overflow: hidden;
         }
         
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Coffee Steam Animation particles */
-        .steam {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            width: 8px;
-            height: 8px;
-            background: #BCAAA4;
-            border-radius: 50%;
-            opacity: 0;
-            z-index: 1;
-        }
+        .steam { position: absolute; top: -10px; left: 50%; width: 8px; height: 8px; background: #BCAAA4; border-radius: 50%; opacity: 0; z-index: 1; }
         .steam:nth-child(1) { animation: steam 2s infinite 0.5s; left: 40%; }
         .steam:nth-child(2) { animation: steam 2.5s infinite 1s; left: 50%; }
         .steam:nth-child(3) { animation: steam 1.8s infinite 1.5s; left: 60%; }
 
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        header .tagline {
-            color: var(--text-light);
-            font-size: 1.2rem;
-            font-weight: 600;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.3s forwards; /* Delayed entrance */
-        }
+        header h1 { font-size: 3rem; margin-bottom: 10px; letter-spacing: -1px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); animation: fadeInUp 1s ease-out forwards; }
+        header .tagline { color: var(--text-light); font-size: 1.2rem; font-weight: 600; opacity: 0; animation: fadeInUp 1s ease-out 0.3s forwards; }
         
-        /* Time Widget */
         .time-widget {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 20px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--highlight);
-            border: 1px solid rgba(255, 204, 128, 0.1);
-            animation: fadeInUp 1s ease-out 0.4s forwards;
-            opacity: 0;
+            display: inline-block; margin-top: 15px; padding: 8px 20px; background: rgba(0,0,0,0.2);
+            border-radius: 20px; font-size: 0.9rem; color: var(--highlight);
+            border: 1px solid rgba(255, 204, 128, 0.1); animation: fadeInUp 1s ease-out 0.4s forwards; opacity: 0;
         }
 
-        .social-links {
-            margin-top: 30px;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.5s forwards;
-        }
+        .social-links { margin-top: 30px; opacity: 0; animation: fadeInUp 1s ease-out 0.5s forwards; }
 
-        /* --- BUTTONS --- */
         .btn {
-            display: inline-block;
-            background-color: var(--highlight);
-            color: #2C2420;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 800;
-            margin: 8px;
-            border: 2px solid var(--highlight);
-            transform: scale(1);
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy spring transition */
+            display: inline-block; background-color: var(--highlight); color: #2C2420;
+            padding: 12px 30px; border-radius: 50px; font-weight: 800; margin: 8px;
+            border: 2px solid var(--highlight); transform: scale(1);
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        .btn:hover { background-color: transparent; color: var(--highlight); transform: scale(1.05) translateY(-3px); box-shadow: 0 5px 15px rgba(255, 204, 128, 0.2); }
+        .btn-secondary { background-color: transparent; color: var(--text-main); border: 2px solid var(--text-main); }
+        .btn-secondary:hover { background-color: var(--text-main); color: var(--bg-color); }
 
-        .btn:hover {
-            background-color: transparent;
-            color: var(--highlight);
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 204, 128, 0.2);
-        }
+        section { margin-bottom: 80px; opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        section.visible { opacity: 1; transform: translateY(0); }
 
-        .btn:active { transform: scale(0.95); }
+        .section-title { text-align: center; font-size: 2rem; margin-bottom: 40px; position: relative; }
+        .section-title span { display: inline-block; border-bottom: 4px solid var(--highlight); padding-bottom: 5px; }
 
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 2px solid var(--text-main);
-        }
+        .card-style { background: var(--card-bg); padding: 35px; border-radius: var(--border-radius); box-shadow: var(--shadow-soft); transition: transform 0.4s ease; border: 1px solid rgba(255,255,255,0.05); }
+        .card-style:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
 
-        .btn-secondary:hover {
-            background-color: var(--text-main);
-            color: var(--bg-color);
-        }
-
-        /* --- SECTIONS & SCROLL REVEAL --- */
-        section {
-            margin-bottom: 80px;
-            opacity: 0; /* Hidden by default for JS reveal */
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .section-title span {
-            display: inline-block;
-            border-bottom: 4px solid var(--highlight);
-            padding-bottom: 5px;
-            border-radius: 2px;
-        }
-
-        /* --- CARDS (About & Projects) --- */
-        .card-style {
-            background: var(--card-bg);
-            padding: 35px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .card-style:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        /* --- SKILLS GRID --- */
-        .skills-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 25px;
-        }
-
+        .skills-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-top: 25px; }
         .skill-tag {
-            background: #3E2723;
-            padding: 10px 20px;
-            border-radius: 15px;
-            font-size: 0.95rem;
-            color: var(--text-main);
-            font-weight: 700;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: 0.3s;
-            cursor: default;
+            background: #3E2723; padding: 10px 20px; border-radius: 15px; font-size: 0.95rem;
+            color: var(--text-main); font-weight: 700; border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s; cursor: default;
         }
+        .skill-tag:hover { background: var(--highlight); color: #2C2420; border-color: var(--highlight); transform: rotate(-2deg) scale(1.05); }
 
-        .skill-tag:hover {
-            background: var(--highlight);
-            color: #2C2420;
-            border-color: var(--highlight);
-            transform: rotate(-2deg) scale(1.05);
-        }
-
-        /* --- PROJECT GRID --- */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
         .project-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            top: 0;
-            border: 1px solid rgba(255,255,255,0.05);
+            background: var(--card-bg); border-radius: var(--border-radius); overflow: hidden;
+            box-shadow: var(--shadow-soft); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; top: 0; border: 1px solid rgba(255,255,255,0.05);
         }
-
-        .project-card:hover {
-            top: -10px;
-            box-shadow: var(--shadow-hover);
-        }
-
-        /* Header image for project */
-        .project-image {
-            height: 180px;
-            background-color: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255,255,255,0.7);
-            font-size: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .project-image::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-25deg);
-            transition: 0.5s;
-        }
-
-        .project-card:hover .project-image::after {
-            left: 100%;
-            transition: 0.7s;
-        }
-
+        .project-card:hover { top: -10px; box-shadow: var(--shadow-hover); }
         .project-content { padding: 25px; }
-
-        .project-title { font-size: 1.3rem; margin-bottom: 8px; color: var(--highlight); }
-
-        .project-desc {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-        /* --- VIDEO CONTAINER --- */
+        .project-title { font-size: 1.3rem; margin-bottom: 5px; color: var(--highlight); }
+        .project-type { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 15px; display: block; font-weight: bold; }
+        
         .video-container {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            background: #000;
-            border: 2px solid #3E2723;
+            width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 15px;
+            background: #000; border: 2px solid #3E2723; position: relative; padding-bottom: 56.25%; /* 16:9 Aspect Ratio */ height: 0;
         }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        video {
-            width: 100%;
-            display: block;
-        }
-
-        /* --- CODE SNIPPET (Luau Style) --- */
-        .code-window {
-            background: var(--code-bg);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #3E2723;
-        }
-        
-        /* Mac-style dots */
-        .code-window::before {
-            content: '● ● ●';
-            color: rgba(255,255,255,0.15);
-            font-size: 10px;
-            letter-spacing: 2px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .code-snippet {
-            color: #E0E0E0;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.85rem;
-            white-space: pre-wrap;
-            line-height: 1.4;
-        }
-        
-        .keyword { color: #FFAB91; font-weight: bold; } /* Luau keywords */
-        .string { color: #C5E1A5; } /* Luau strings */
-        .func { color: #80CBC4; } /* Luau functions */
-        .comment { color: #6D4C41; font-style: italic; } /* Comments */
-
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            color: var(--text-light);
-            padding: 60px 0 20px;
-            font-size: 0.9rem;
-            opacity: 0.6;
-            transition: 0.3s;
-        }
-        
-        footer:hover { opacity: 1; transform: scale(1.02); }
-
+        footer { text-align: center; color: var(--text-light); padding: 60px 0 20px; opacity: 0.6; transition: 0.3s; }
+        footer:hover { opacity: 1; }
     </style>
 </head>
 <body>
@@ -394,24 +125,14 @@
     <!-- Header Section -->
     <header>
         <div class="avatar-container">
-            <!-- Animated Steam Particles -->
-            <div class="steam"></div>
-            <div class="steam"></div>
-            <div class="steam"></div>
-            <!-- You can change this to an <img> tag if you have a direct link to your avatar image -->
+            <div class="steam"></div><div class="steam"></div><div class="steam"></div>
             <div class="avatar">☕</div>
         </div>
         
-        <!-- Editable Content ID: display-name -->
         <h1 id="display-name">Loading...</h1>
-        
-        <!-- Editable Content ID: display-tagline -->
         <p class="tagline" id="display-tagline">Loading...</p>
 
-        <!-- Time Display -->
-        <div class="time-widget" id="time-widget">
-            Checking clock...
-        </div>
+        <div class="time-widget" id="time-widget">Checking clock...</div>
         
         <div class="social-links">
             <a href="#" class="btn" id="btn-contact">Contact Me</a>
@@ -423,74 +144,17 @@
     <section class="scroll-reveal">
         <h2 class="section-title"><span>About Me</span></h2>
         <div class="card-style about-card">
-            <!-- Editable Content ID: display-about -->
-            <div id="display-about">
-                <p>Loading about section...</p>
-            </div>
-            
-            <div class="skills-grid" id="display-skills">
-                <!-- Skills injected by JS -->
-            </div>
+            <div id="display-about">Loading about section...</div>
+            <div class="skills-grid" id="display-skills"></div>
         </div>
     </section>
 
     <!-- Projects Section -->
     <section class="scroll-reveal">
         <h2 class="section-title"><span>Showcase</span></h2>
-        <div class="project-grid">
-            
-            <!-- Project 1 -->
-            <div class="project-card">
-                <div class="project-image">Advanced Lobby System</div>
-                <div class="project-content">
-                    <h3 class="project-title">Risky Raiders</h3>
-                    <p class="project-desc">An advanced system seen in many high-tier games such as A Dusty Trip, the main inspiration for the system.
-                    I used debounces to ensure that the teleports would be performed smoothly.</p>
-                    
-                    <div class="video-container">
-                        <!-- Replace src with your own video file -->
-                        <video controls>
-                            <source src="my_gameplay.mp4" type="video/mp4">
-                        </video>
-                    </div>
-
-                    <div class="code-window">
-                        <div class="code-snippet">
-<span class="comment">-- Brewing logic handling</span>
-<span class="keyword">function</span> Cafe:<span class="func">Brew</span>()
-  self.Status = <span class="string">"Brewing..."</span>
-  SoundService:Play(<span class="string">"Pour"</span>)
-  <span class="comment">-- Wait for brew time</span>
-  task.wait(2.5)
-<span class="keyword">end</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="project-card">
-                <div class="project-image">Inventory 🎒</div>
-                <div class="project-content">
-                    <h3 class="project-title">Cosy Backpack</h3>
-                    <p class="project-desc">A grid-based inventory system that saves data using ProfileService.</p>
-                    
-                     <div class="video-container">
-                        <video controls>
-                            <source src="inventory_demo.mp4" type="video/mp4">
-                        </video>
-                    </div>
-
-                     <div class="code-window">
-                        <div class="code-snippet">
-<span class="comment">-- Adding item to inventory</span>
-<span class="keyword">local</span> Profile = ProfileService.<span class="func">Get</span>(player)
-Profile.Data.Items[<span class="string">"Book"</span>] += 1
-print(<span class="string">"Item added!"</span>)
-</div>
-                    </div>
-                </div>
-            </div>
-
+        <!-- We now generate the projects from the Javascript Config below -->
+        <div class="project-grid" id="project-container">
+            <!-- Projects will appear here automatically -->
         </div>
     </section>
 
@@ -523,9 +187,7 @@ print(<span class="string">"Item added!"</span>)
         
         // --- LINKS ---
         robloxProfile: "https://www.roblox.com/users/1106353740/profile",
-        contactLink: "#", // You can put a link to a form or mailto here
-        
-        // --- SOCIALS ---
+        contactLink: "#", 
         discordUsername: "Discord: nonameneeded._",
         
         // --- ABOUT TEXT ---
@@ -542,13 +204,43 @@ print(<span class="string">"Item added!"</span>)
 
         // --- SKILLS LIST ---
         skills: [
-            "💎 Luau",
-            "🐍 Python",
-            "🧶 Knit",
-            "⚛️ Roact",
-            "🎨 UI Design",
-            "✨ Tweening & Lerping",
-            "📦 ModuleScripts"
+            "💎 Luau", "🐍 Python", "🧶 Knit", "⚛️ Roact", 
+            "🎨 UI Design", "✨ Tweening", "📦 ModuleScripts"
+        ],
+
+        // --- PROJECTS (Add your videos here!) ---
+        // Just paste the YouTube ID (the part after v= or .be/)
+        projects: [
+            {
+                title: "Commissioned System",
+                type: "Commission",
+                youtubeId: "cU1u4DKdAcM"
+            },
+            {
+                title: "Personal Project",
+                type: "Personal Work",
+                youtubeId: "vFTr5wMPnEg"
+            },
+            {
+                title: "Personal Showcase",
+                type: "Personal Work",
+                youtubeId: "FHdad-QbWls"
+            },
+            {
+                title: "Commission Work",
+                type: "Commission",
+                youtubeId: "yURAAltHQMU"
+            },
+            {
+                title: "Contracted Development",
+                type: "Contract Work",
+                youtubeId: "_ivqV-2eacA"
+            },
+            {
+                title: "Asset For Sale",
+                type: "For Sale (DM Me)",
+                youtubeId: "l3uYfZewcOM"
+            }
         ]
     };
 
@@ -556,71 +248,76 @@ print(<span class="string">"Item added!"</span>)
     const TIMEZONE = "Europe/London"; 
 
     // ==========================================
-    //    SYSTEM LOGIC (DO NOT EDIT BELOW)
+    //    SYSTEM LOGIC
     // ==========================================
 
+    function renderProjects() {
+        const container = document.getElementById('project-container');
+        container.innerHTML = ""; // Clear current
+
+        CONFIG.projects.forEach(proj => {
+            const card = document.createElement('div');
+            card.className = "project-card";
+            
+            card.innerHTML = `
+                <div class="project-content">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/${proj.youtubeId}" allowfullscreen></iframe>
+                    </div>
+                    <h3 class="project-title">${proj.title}</h3>
+                    <span class="project-type">${proj.type}</span>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
     function updateContent() {
-        // Update Text
         document.getElementById('display-name').textContent = CONFIG.name;
         document.getElementById('display-tagline').textContent = CONFIG.tagline;
         document.getElementById('display-about').innerHTML = CONFIG.aboutText;
         document.getElementById('display-discord').textContent = CONFIG.discordUsername;
-
-        // Update Links
         document.getElementById('btn-roblox').href = CONFIG.robloxProfile;
         document.getElementById('btn-contact').href = CONFIG.contactLink;
 
-        // Update Skills
         const skillsContainer = document.getElementById('display-skills');
-        skillsContainer.innerHTML = ""; // Clear existing
+        skillsContainer.innerHTML = "";
         CONFIG.skills.forEach(skill => {
             const span = document.createElement('span');
             span.className = 'skill-tag';
             span.textContent = skill;
             skillsContainer.appendChild(span);
         });
+
+        // Render projects automatically
+        renderProjects();
     }
 
     function updateTime() {
         const timeElement = document.getElementById('time-widget');
         const now = new Date();
-        
         const timeString = now.toLocaleTimeString("en-GB", {
-            timeZone: TIMEZONE,
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
+            timeZone: TIMEZONE, hour: '2-digit', minute: '2-digit', hour12: true
         });
-
         timeElement.textContent = "It's currently " + timeString + " for me (UK)";
     }
 
-    // Run on load
     updateContent();
-    setInterval(updateTime, 1000); // Update clock every second
-    updateTime(); // Initial call
+    setInterval(updateTime, 1000);
+    updateTime();
 
-    // Scroll Observer
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
+    // Scroll Animations
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.scroll-reveal').forEach((element) => {
-        observer.observe(element);
-    });
+    document.querySelectorAll('.scroll-reveal').forEach((element) => observer.observe(element));
 </script>
 
 </body>
-
 </html>
